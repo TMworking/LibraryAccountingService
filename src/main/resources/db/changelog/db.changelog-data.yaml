@@ -1,0 +1,135 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-catalogs
+      author: maksim
+      preConditions:
+        - onFail: MARK_RAN
+        - sqlCheck:
+            expectedResult: 0
+            sql: SELECT COUNT(*) FROM catalogs
+      changes:
+        - loadData:
+            file: classpath:csv/Catalogs.csv
+            tableName: catalogs
+            separator: ","
+            encoding: UTF-8
+
+  - changeSet:
+      id: insert-authors
+      author: maksim
+      preConditions:
+        - onFail: MARK_RAN
+        - sqlCheck:
+            expectedResult: 0
+            sql: SELECT COUNT(*) FROM authors
+      changes:
+        - loadData:
+            file: classpath:csv/Authors.csv
+            tableName: authors
+            separator: ","
+            encoding: UTF-8
+
+  - changeSet:
+      id: insert-books
+      author: maksim
+      preConditions:
+        - onFail: MARK_RAN
+        - sqlCheck:
+            expectedResult: 0
+            sql: SELECT COUNT(*) FROM books
+      changes:
+        - loadData:
+            file: classpath:csv/Books.csv
+            tableName: books
+            separator: ","
+            encoding: UTF-8
+
+  - changeSet:
+      id: insert-authors-books
+      author: maksim
+      preConditions:
+        - onFail: MARK_RAN
+        - sqlCheck:
+            expectedResult: 0
+            sql: SELECT COUNT(*) FROM author_book
+      changes:
+        - loadData:
+            file: classpath:csv/AuthorBook.csv
+            tableName: author_book
+            separator: ","
+            encoding: UTF-8
+
+  - changeSet:
+      id: insert-roles
+      author: maksim
+      preConditions:
+        - onFail: MARK_RAN
+        - sqlCheck:
+            expectedResult: 0
+            sql: SELECT COUNT(*) FROM roles
+      changes:
+        - loadData:
+            file: classpath:csv/Roles.csv
+            tableName: roles
+            separator: ","
+            encoding: UTF-8
+
+  - changeSet:
+      id: insert-users
+      author: maksim
+      preConditions:
+        - onFail: MARK_RAN
+        - sqlCheck:
+            expectedResult: 0
+            sql: SELECT COUNT(*) FROM users
+      changes:
+        - loadData:
+            file: classpath:csv/Users.csv
+            tableName: users
+            separator: ","
+            encoding: UTF-8
+
+  - changeSet:
+      id: insert-rentals
+      author: maksim
+      preConditions:
+        - onFail: MARK_RAN
+        - sqlCheck:
+            expectedResult: 0
+            sql: SELECT COUNT(*) FROM rentals
+      changes:
+        - loadData:
+            file: classpath:csv/Rentals.csv
+            tableName: rentals
+            separator: ","
+            encoding: UTF-8
+
+  - changeSet:
+      id: insert-catalog-book
+      author: maksim
+      preConditions:
+        - onFail: MARK_RAN
+        - sqlCheck:
+            expectedResult: 0
+            sql: SELECT COUNT(*) FROM catalog_book
+      changes:
+        - loadData:
+            file: classpath:csv/CatalogBook.csv
+            tableName: catalog_book
+            separator: ","
+            encoding: UTF-8
+
+  - changeSet:
+      id: insert-user-role
+      author: maksim
+      preConditions:
+        - onFail: MARK_RAN
+        - sqlCheck:
+            expectedResult: 0
+            sql: SELECT COUNT(*) FROM user_role
+      changes:
+        - loadData:
+            file: classpath:csv/UserRole.csv
+            tableName: user_role
+            separator: ","
+            encoding: UTF-8

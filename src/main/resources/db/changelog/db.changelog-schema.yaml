@@ -1,0 +1,326 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001
+      author: maksim
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                tableName: authors
+        - not:
+            - tableExists:
+                tableName: books
+        - not:
+            - tableExists:
+                tableName: author_book
+        - not:
+            - tableExists:
+                tableName: rentals
+        - not:
+            - tableExists:
+                tableName: catalogs
+        - not:
+            - tableExists:
+                tableName: refresh_tokens
+        - not:
+            - tableExists:
+                tableName: users
+        - not:
+            - tableExists:
+                tableName: roles
+        - not:
+            - tableExists:
+                tableName: user_role
+      changes:
+        - createTable:
+            tableName: catalogs
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_catalogs
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: parent_id
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+                    foreignKeyName: fk_catalogs_parent
+                    references: catalogs(id)
+
+        - createTable:
+            tableName: authors
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_authors
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: surname
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+
+        - createTable:
+            tableName: books
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_books
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: TEXT
+              - column:
+                  name: available_count
+                  type: INT
+              - column:
+                  name: creation_date
+                  type: DATE
+              - column:
+                  name: deleted_at
+                  type: TIMESTAMP WITH TIMEZONE
+
+        - createTable:
+            - tableName: users
+            - columns:
+                - column:
+                    name: id
+                    type: BIGINT
+                    autoIncrement: true
+                    constraints:
+                      primaryKey: true
+                      primaryKeyName: pk_users
+                - column:
+                    name: name
+                    type: VARCHAR(255)
+                    constraints:
+                      nullable: false
+                - column:
+                    name: surname
+                    type: VARCHAR(255)
+                    constraints:
+                      nullable: false
+                - column:
+                    name: patronymic
+                    type: VARCHAR(255)
+                    constraints:
+                      nullable: true
+                - column:
+                    name: phone_number
+                    type: VARCHAR(20)
+                    constraints:
+                      nullable: false
+                      unique: true
+                - column:
+                    name: passport
+                    type: VARCHAR(20)
+                    constraints:
+                      nullable: false
+                      unique: true
+                - column:
+                    name: email
+                    type: VARCHAR(255)
+                    constraints:
+                      unique: true
+                - column:
+                    name: password
+                    type: VARCHAR(255)
+                    constraints:
+                      nullable: false
+                - column:
+                    name: enabled
+                    type: BOOLEAN
+                    defaultValue: true
+                    constraints:
+                      nullable: false
+
+        - createTable:
+            tableName: author_book
+            columns:
+              - column:
+                  name: author_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    foreignKeyName: fk_author_book_author
+                    references: authors(id)
+                    deleteCascade: true
+              - column:
+                  name: book_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    foreignKeyName: fk_author_book_book
+                    references: books(id)
+                    deleteCascade: true
+
+        - createTable:
+            tableName: rentals
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_rentals
+              - column:
+                  name: book_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_rentals_book
+                    references: books(id)
+              - column:
+                  name: user_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_rentals_user
+                    references: users(id)
+              - column:
+                  name: rent_date
+                  type: TIMESTAMP WITH TIME ZONE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: duration
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: return_date
+                  type: TIMESTAMP WITH TIME ZONE
+                  constraints:
+                    nullable: true
+
+        - createTable:
+            tableName: catalog_book
+            columns:
+              - column:
+                  name: catalog_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    foreignKeyName: fk_catalog_books_catalog
+                    references: catalogs(id)
+                    deleteCascade: true
+              - column:
+                  name: book_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    foreignKeyName: fk_catalog_books_book
+                    references: books(id)
+                    deleteCascade: true
+
+        - createTable:
+            - tableName: roles
+            - columns:
+                - column:
+                    name: id
+                    type: BIGINT
+                    autoIncrement: true
+                    constraints:
+                      primaryKey: true
+                      nullable: false
+                - column:
+                    name: role_name
+                    type: VARCHAR(20)
+                    defaultValue: 'USER'
+                    constraints:
+                      nullable: false
+
+        - createTable:
+            tableName: user_role
+            columns:
+              - column:
+                  name: user_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    foreignKeyName: fk_user_role_user
+                    references: users(id)
+                    deleteCascade: true
+              - column:
+                  name: role_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    foreignKeyName: fk_user_role_role
+                    references: roles(id)
+                    deleteCascade: true
+
+        - createTable:
+            tableName: refresh_tokens
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_refresh_tokens
+              - column:
+                  name: token
+                  type: VARCHAR(255)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_refresh_token_user
+                    references: users(id)
+              - column:
+                  name: expiry_date
+                  type: TIMESTAMP WITH TIME ZONE
+                  constraints:
+                    nullable: false
+
+        - sql:
+            sql: |
+              CREATE MATERIALIZED VIEW overdue_rentals AS
+              SELECT 
+                  r.id AS rental_id,
+                  r.user_id,
+                  r.book_id,
+                  r.rent_date,
+                  (r.rent_date + (r.duration * INTERVAL '1 day')) AS due_date
+              FROM 
+                  rentals r
+              WHERE 
+                  r.return_date IS NULL 
+                  AND (r.rent_date + (r.duration * INTERVAL '1 day')) < CURRENT_DATE;
