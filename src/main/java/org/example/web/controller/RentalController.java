@@ -34,6 +34,7 @@ public class RentalController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+    // TODO: move to user and book and GetMapping
     @PostMapping("/search")
     public ResponseEntity<RentalPageResponse> getAllRentalsWithFilter(@Valid @RequestBody RentalFilterRequest request) {
         RentalPageResponse response = new RentalPageResponse();
@@ -60,7 +61,6 @@ public class RentalController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    // Merge by adding overdue in filter or not?
     @PostMapping("/overdue")
     public ResponseEntity<OverdueRentalPageResponse> getAllOverdueRentals(@Valid @RequestBody RentalFilterRequest request) {
         OverdueRentalPageResponse response = new OverdueRentalPageResponse();

@@ -7,9 +7,9 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Order;
 import jakarta.persistence.criteria.Root;
-import org.example.model.domain.Author;
+import org.example.domain.Author;
 import org.example.repository.AuthorRepository;
-import org.example.repository.Page;
+import org.example.model.Page;
 import org.example.web.dto.author.request.AuthorSortRequest;
 import org.springframework.stereotype.Repository;
 

@@ -12,5 +12,6 @@ import java.util.List;
 public class CatalogResponse {
     private Long id;
     private String name;
-    private List<CatalogResponse> children;
+    private Long parentId;
+    private int booksCount;
 }

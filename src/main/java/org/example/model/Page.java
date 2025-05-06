@@ -1,4 +1,4 @@
-package org.example.repository;
+package org.example.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

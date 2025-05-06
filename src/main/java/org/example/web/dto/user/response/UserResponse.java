@@ -3,7 +3,7 @@ package org.example.web.dto.user.response;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.example.model.enums.UserRole;
+import org.example.domain.enums.UserRole;
 
 import java.util.List;
 

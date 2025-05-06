@@ -1,4 +1,4 @@
-package org.example.model.domain;
+package org.example.domain;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;

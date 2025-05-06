@@ -1,4 +1,4 @@
-package org.example.model.domain;
+package org.example.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,33 +12,26 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "rentals")
+@Table(name = "refresh_tokens")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Rental {
+public class RefreshToken {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "book_id", nullable = false)
-    private Book book;
+    @Column(name = "token", nullable = false, unique = true)
+    private String token;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(name = "rent_date", nullable = false)
-    private Instant rentDate;
-
-    @Column(name = "duration", nullable = false)
-    private Integer duration;
-
-    @Column(name = "return_date")
-    private Instant returnDate;
+    @Column(name = "expiry_date", nullable = false)
+    private LocalDateTime expiryDate;
 }

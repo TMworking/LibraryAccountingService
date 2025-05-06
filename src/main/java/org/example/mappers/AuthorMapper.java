@@ -1,7 +1,7 @@
 package org.example.mappers;
 
-import org.example.model.domain.Author;
-import org.example.repository.Page;
+import org.example.domain.Author;
+import org.example.model.Page;
 import org.example.web.dto.author.request.AuthorRequest;
 import org.example.web.dto.author.response.AuthorPageResponse;
 import org.example.web.dto.author.response.AuthorResponse;

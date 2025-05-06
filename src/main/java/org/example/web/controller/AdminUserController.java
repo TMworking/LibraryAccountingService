@@ -29,6 +29,7 @@ public class AdminUserController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
     }
 
+    // TODO: collapse add and remove
     @PatchMapping("/{id}/role/removal")
     public ResponseEntity<Void> removeRoleFromUser(@PathVariable("id") Long id, @Valid @RequestBody RoleRequest request) {
         // TODO

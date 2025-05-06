@@ -1,4 +1,4 @@
-package org.example.model.domain;
+package org.example.domain;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -68,5 +68,9 @@ public class Catalog {
         if (children.remove(child)) {
             child.setParent(null);
         }
+    }
+
+    public boolean isRootCatalog() {
+        return parent == null;
     }
 }

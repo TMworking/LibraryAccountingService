@@ -29,7 +29,7 @@ public class BookCreateRequest {
     @Size(max = 1000)
     private String description;
 
-    private LocalDateTime creationDate;
+    private LocalDateTime publisingDate;
 
     @Builder.Default
     private List<Long> authorIds = new ArrayList<>();

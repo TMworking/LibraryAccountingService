@@ -19,6 +19,4 @@ public class CatalogCreateRequest {
     @Size(min = 3, max = 50)
     private String name;
     private Long parentId;
-    @Builder.Default
-    private List<Long> childrenIds = new ArrayList<>();
 }

@@ -1,6 +1,6 @@
 package org.example.repository;
 
-import org.example.model.domain.Book;
+import org.example.domain.Book;
 
 import java.util.List;
 import java.util.Optional;

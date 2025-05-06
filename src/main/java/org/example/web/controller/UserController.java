@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/u")
+@RequestMapping("/api/v1/user")
 @Tag(name = "User")
 public class UserController {
 
@@ -34,7 +34,8 @@ public class UserController {
         return ResponseEntity.ok().body(response);
     }
 
-    @PutMapping("/{id}")
+
+    @PatchMapping("/{id}")
     @PreAuthorize("#id == principal.id or hasRole('ADMIN')")
     public ResponseEntity<UserResponse> updateUserInfo(@PathVariable("id") Long id, @Valid @RequestBody UserUpdateRequest request) {
         UserResponse response = new UserResponse();
@@ -57,7 +58,6 @@ public class UserController {
         return ResponseEntity.ok().body(response);
     }
 
-    // TODO: user should change his email by itself or not?
     @PatchMapping("/{id}/email")
     @PreAuthorize("hasRole('ADMIN') or hasRole('LIBRARIAN')")
     public ResponseEntity<UserResponse> updateUserEmail(@PathVariable("id") Long id, @Valid @RequestBody UserEmailChangeRequest request) {
@@ -65,4 +65,5 @@ public class UserController {
         // TODO
         return ResponseEntity.ok().body(response);
     }
+    // TODO: user cant change his mail
 }

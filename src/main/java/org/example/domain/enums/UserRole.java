@@ -1,4 +1,4 @@
-package org.example.model.enums;
+package org.example.domain.enums;
 
 public enum UserRole {
     ADMIN,

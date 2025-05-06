@@ -5,7 +5,7 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
-import org.example.model.domain.Book;
+import org.example.domain.Book;
 import org.example.repository.BookRepository;
 import org.springframework.stereotype.Repository;
 

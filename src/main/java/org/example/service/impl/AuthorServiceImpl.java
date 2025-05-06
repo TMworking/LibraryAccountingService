@@ -2,10 +2,10 @@ package org.example.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.example.exception.NotFoundException;
-import org.example.model.domain.Author;
-import org.example.model.domain.Book;
+import org.example.domain.Author;
+import org.example.domain.Book;
 import org.example.repository.AuthorRepository;
-import org.example.repository.Page;
+import org.example.model.Page;
 import org.example.service.AuthorService;
 import org.example.service.BookService;
 import org.example.web.dto.author.request.AuthorSortRequest;
