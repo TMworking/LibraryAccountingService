@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserEmailChangeRequest {
-
     @NotBlank
     @Email
     private String email;

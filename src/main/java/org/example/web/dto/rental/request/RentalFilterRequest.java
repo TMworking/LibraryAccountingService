@@ -4,11 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.example.web.dto.common.SortOption;
-import org.yaml.snakeyaml.util.ArrayUtils;
+import org.example.model.SortOption;
 
-import java.time.LocalDateTime;
-import java.util.Arrays;
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -16,7 +14,6 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class RentalFilterRequest {
-
     @Builder.Default
     private Integer page = 0;
     @Builder.Default
@@ -24,12 +21,9 @@ public class RentalFilterRequest {
     @Builder.Default
     private List<SortOption> sortOptions = List.of(new SortOption("id", "asc"));
 
-    private Long userId;
-    private Long bookId;
-    private Integer minDuration;
-    private Integer maxDuration;
+    private Boolean isClosed;
     @Builder.Default
-    private LocalDateTime rentDateFrom = LocalDateTime.now().minusMonths(3);
+    private LocalDate rentDateFrom = LocalDate.now().minusMonths(3);
     @Builder.Default
-    private LocalDateTime rentDateTo = LocalDateTime.now();
+    private LocalDate rentDateTo = LocalDate.now();
 }

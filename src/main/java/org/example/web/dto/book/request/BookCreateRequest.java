@@ -9,7 +9,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +29,7 @@ public class BookCreateRequest {
     @Size(max = 1000)
     private String description;
 
-    private LocalDateTime publisingDate;
+    private LocalDate publishingDate;
 
     @Builder.Default
     private List<Long> authorIds = new ArrayList<>();

@@ -16,3 +16,11 @@ spring:
   liquibase:
     enabled: true
     change-log: classpath:db/changelog/db.changelog-master.yaml
+
+springdoc:
+  swagger-ui:
+    tagsSorter: alpha
+    docExpansion: none
+    operationsSorter: alpha
+    persist-authorization: true
+    try-it-out-enabled: true

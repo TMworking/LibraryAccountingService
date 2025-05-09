@@ -23,15 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
 // TODO: only for ADMIN role
 public class AdminUserController {
 
-    @PatchMapping("/{id}/role/addendum")
-    public ResponseEntity<Void> addRoleToUser(@PathVariable("id") Long id, @Valid @RequestBody RoleRequest request) {
-        // TODO
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
-    }
-
-    // TODO: collapse add and remove
-    @PatchMapping("/{id}/role/removal")
-    public ResponseEntity<Void> removeRoleFromUser(@PathVariable("id") Long id, @Valid @RequestBody RoleRequest request) {
+    @PatchMapping("/{id}/role")
+    public ResponseEntity<Void> updateUserRoles(@PathVariable("id") Long id, @Valid @RequestBody RoleRequest request) {
         // TODO
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
     }

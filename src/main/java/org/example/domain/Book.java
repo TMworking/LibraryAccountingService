@@ -15,8 +15,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,22 +34,22 @@ public class Book {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @ManyToMany(mappedBy = "books")
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    private List<Catalog> catalogs = new ArrayList<>();
-
     @Column(name = "description")
     private String description;
 
     @Column(name = "available_count")
     private Integer availableCount;
 
-    @Column(name = "creation_date")
-    private LocalDate creationDate;
+    @Column(name = "publishing_date")
+    private LocalDate publishingDate;
 
     @Column(name = "deleted_at")
-    private Instant deletedAt;
+    private LocalDateTime deletedAt;
+
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @ManyToMany(mappedBy = "books")
+    private List<Catalog> catalogs = new ArrayList<>();
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
@@ -64,5 +64,19 @@ public class Book {
     public void addRental(Rental rental) {
         this.rentals.add(rental);
         rental.setBook(this);
+    }
+
+    public void addAuthors(List<Author> authors) {
+        for (Author author : authors) {
+            this.authors.add(author);
+            author.getBooks().add(this);
+        }
+    }
+
+    public void addCatalogs(List<Catalog> catalogs) {
+        for (Catalog catalog : catalogs) {
+            this.catalogs.add(catalog);
+            catalog.getBooks().add(this);
+        }
     }
 }

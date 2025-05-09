@@ -98,11 +98,11 @@ databaseChangeLog:
                   name: available_count
                   type: INT
               - column:
-                  name: creation_date
+                  name: publishing_date
                   type: DATE
               - column:
                   name: deleted_at
-                  type: TIMESTAMP WITH TIMEZONE
+                  type: TIMESTAMP
 
         - createTable:
             - tableName: users
@@ -206,7 +206,7 @@ databaseChangeLog:
                     references: users(id)
               - column:
                   name: rent_date
-                  type: TIMESTAMP WITH TIME ZONE
+                  type: DATE
                   constraints:
                     nullable: false
               - column:
@@ -216,7 +216,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: return_date
-                  type: TIMESTAMP WITH TIME ZONE
+                  type: DATE
                   constraints:
                     nullable: true
 
@@ -306,7 +306,7 @@ databaseChangeLog:
                     references: users(id)
               - column:
                   name: expiry_date
-                  type: TIMESTAMP WITH TIME ZONE
+                  type: TIMESTAMP
                   constraints:
                     nullable: false
 
@@ -318,9 +318,9 @@ databaseChangeLog:
                   r.user_id,
                   r.book_id,
                   r.rent_date,
-                  (r.rent_date + (r.duration * INTERVAL '1 day')) AS due_date
+                  (r.rent_date + (r.duration * INTERVAL '1 day'))::DATE AS due_date
               FROM 
                   rentals r
               WHERE 
                   r.return_date IS NULL 
-                  AND (r.rent_date + (r.duration * INTERVAL '1 day')) < CURRENT_DATE;
+                  AND (r.rent_date + (r.duration * INTERVAL '1 day'))::DATE < CURRENT_DATE;

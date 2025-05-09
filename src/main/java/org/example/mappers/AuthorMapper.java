@@ -20,7 +20,6 @@ public interface AuthorMapper {
         return author;
     }
 
-
     default AuthorPageResponse toPageResponse(Page<Author> page) {
         return new AuthorPageResponse(
                 page.getContent().stream().map(this::toResponse).toList(),

@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RentalProlongationRequest {
-
     @NotNull
     @Min(value = 1)
     private int days;

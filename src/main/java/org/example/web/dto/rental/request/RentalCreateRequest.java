@@ -5,22 +5,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class RentalCreateRequest {
-
     @NotNull
     private Long userId;
-
     @NotNull
     private Long bookId;
-
     @NotNull
-    private LocalDateTime rentDate;
-
+    private LocalDate rentDate;
     @NotNull
     private Integer duration;
 }

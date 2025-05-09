@@ -1,4 +1,4 @@
-package org.example.service.impl;
+package org.example.service.domain.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.example.exception.NotFoundException;
@@ -6,8 +6,8 @@ import org.example.domain.Author;
 import org.example.domain.Book;
 import org.example.repository.AuthorRepository;
 import org.example.model.Page;
-import org.example.service.AuthorService;
-import org.example.service.BookService;
+import org.example.service.domain.AuthorService;
+import org.example.service.domain.BookService;
 import org.example.web.dto.author.request.AuthorSortRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,11 +36,13 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
+    @Transactional
     public Author saveAuthor(Author author) {
         return authorRepository.save(author);
     }
 
     @Override
+    @Transactional
     public Author updateAuthor(Author author) {
         return authorRepository.update(author);
     }
@@ -52,5 +54,10 @@ public class AuthorServiceImpl implements AuthorService {
         Author author = findById(id);
         books.forEach(author::addBook);
         return author;
+    }
+
+    @Override
+    public List<Author> getAllByIds(List<Long> ids) {
+        return authorRepository.findAllByIds(ids);
     }
 }

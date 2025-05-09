@@ -9,7 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Immutable;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Immutable
@@ -30,8 +30,8 @@ public class OverdueRentalView {
     private Long bookId;
 
     @Column(name = "rent_date")
-    private LocalDateTime rentDate;
+    private LocalDate rentDate;
 
     @Column(name = "due_date")
-    private LocalDateTime dueDate;
+    private LocalDate dueDate;
 }

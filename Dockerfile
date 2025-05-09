@@ -1,10 +1,13 @@
 # Stage 1 - build
-FROM maven:3.9.5-eclipse-temurin-17-alpine AS build
+FROM eclipse-temurin:17-jdk-alpine AS build
 WORKDIR /app
+COPY mvnw .
+COPY .mvn/ .mvn/
 COPY pom.xml .
-RUN mvn dependency:go-offline -B
+RUN chmod +x mvnw
+RUN ./mvnw dependency:go-offline -B
 COPY src ./src
-RUN mvn clean package -DskipTests -Dcheckstyle.skip=true
+RUN ./mvnw clean package -DskipTests -Dcheckstyle.skip=true
 # Read about maven-wrapper
 
 # Stage 2 - final

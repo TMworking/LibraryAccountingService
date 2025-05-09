@@ -14,7 +14,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.example.domain.enums.UserRole;
+import org.example.enums.UserRole;
 
 import java.util.List;
 

@@ -12,7 +12,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.Instant;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "rentals")
@@ -34,11 +34,11 @@ public class Rental {
     private User user;
 
     @Column(name = "rent_date", nullable = false)
-    private Instant rentDate;
+    private LocalDate rentDate;
 
     @Column(name = "duration", nullable = false)
     private Integer duration;
 
     @Column(name = "return_date")
-    private Instant returnDate;
+    private LocalDate returnDate;
 }

@@ -3,8 +3,7 @@ package org.example.web.controller;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.example.mappers.AuthorMapper;
-import org.example.service.AuthorService;
+import org.example.service.mapping.AuthorMappingService;
 import org.example.web.dto.author.request.AuthorRequest;
 import org.example.web.dto.book.request.AddBooksRequest;
 import org.example.web.dto.author.request.AuthorSortRequest;
@@ -29,39 +28,32 @@ import org.springframework.web.bind.annotation.RestController;
 // TODO: for ADMIN and LIBRARIAN
 public class AuthorController {
 
-    private final AuthorService authorService;
-    private final AuthorMapper authorMapper;
+    private final AuthorMappingService authorMappingService;
 
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyRole('ADMIN', 'LIBRARIAN', 'USER')")
     public ResponseEntity<AuthorResponse> getAuthorById(@PathVariable("id") Long id) {
-        return ResponseEntity.ok().body(authorMapper.toResponse(authorService.findById(id)));
+        return ResponseEntity.ok().body(authorMappingService.getAuthorById(id));
     }
 
     @PostMapping("/search")
     @PreAuthorize("hasAnyRole('ADMIN', 'LIBRARIAN', 'USER')")
     public ResponseEntity<AuthorPageResponse> getAllAuthors(@Valid @RequestBody AuthorSortRequest request) {
-        return ResponseEntity.ok().body(authorMapper.toPageResponse(authorService.findPageAuthorsWithSort(request)));
+        return ResponseEntity.ok().body(authorMappingService.getAuthorsWithSort(request));
     }
 
     @PostMapping
     public ResponseEntity<AuthorResponse> createAuthor(@Valid @RequestBody AuthorRequest request) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(
-                authorMapper.toResponse(authorService.saveAuthor(authorMapper.toAuthor(request)))
-        );
+        return ResponseEntity.status(HttpStatus.CREATED).body(authorMappingService.createAuthor(request));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AuthorResponse> updateAuthor(@PathVariable("id") Long id, AuthorRequest request) {
-        return ResponseEntity.ok().body(
-                authorMapper.toResponse(authorService.saveAuthor(authorMapper.toAuthor(id, request)))
-        );
+    public ResponseEntity<AuthorResponse> updateAuthor(@PathVariable("id") Long id, @RequestBody AuthorRequest request) {
+        return ResponseEntity.ok().body(authorMappingService.updateAuthor(id, request));
     }
 
     @PatchMapping("/{id}/books")
     public ResponseEntity<AuthorResponse> addBooksToAuthor(@PathVariable("id") Long id, @Valid @RequestBody AddBooksRequest request) {
-        return ResponseEntity.ok().body(
-                authorMapper.toResponse(authorService.addBooksToAuthor(id, request.getBooksIds()))
-        );
+        return ResponseEntity.ok().body(authorMappingService.addBooksToAuthor(id, request));
     }
 }

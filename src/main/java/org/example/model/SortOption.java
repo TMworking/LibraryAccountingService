@@ -1,4 +1,4 @@
-package org.example.web.dto.common;
+package org.example.model;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;

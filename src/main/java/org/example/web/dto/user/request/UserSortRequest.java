@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.model.SortOption;
+
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -15,7 +18,5 @@ public class UserSortRequest {
     @Builder.Default
     private Integer size = 10;
     @Builder.Default
-    private String sortBy = "id";
-    @Builder.Default
-    private String sortDirection = "ASC";
+    private List<SortOption> sortOptionList = List.of(new SortOption("id", "asc"));
 }

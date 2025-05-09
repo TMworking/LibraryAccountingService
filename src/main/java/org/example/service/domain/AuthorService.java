@@ -1,4 +1,4 @@
-package org.example.service;
+package org.example.service.domain;
 
 import org.example.domain.Author;
 import org.example.model.Page;
@@ -12,4 +12,5 @@ public interface AuthorService {
     Author saveAuthor(Author author);
     Author updateAuthor(Author author);
     Author addBooksToAuthor(Long id, List<Long> bookIds);
+    List<Author> getAllByIds(List<Long> ids);
 }

@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserPassportChangeRequest {
-
     @NotBlank
     @Pattern(regexp = "^[0-9]{10}$")
     private String passport;

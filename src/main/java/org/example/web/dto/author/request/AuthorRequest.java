@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class AuthorRequest {
-
     @NotBlank
     private String name;
     @NotBlank

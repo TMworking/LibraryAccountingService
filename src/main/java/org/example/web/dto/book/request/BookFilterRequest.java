@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.model.SortOption;
 
 import java.util.List;
 
@@ -12,15 +13,12 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class BookFilterRequest {
-
     @Builder.Default
     private Integer page = 0;
     @Builder.Default
     private Integer size = 10;
     @Builder.Default
-    private String sortBy = "name";
-    @Builder.Default
-    private String sortDirection = "ASC";
+    private List<SortOption> sortOptionList = List.of(new SortOption("id", "asc"));
 
     private String name;
     private String authorName;

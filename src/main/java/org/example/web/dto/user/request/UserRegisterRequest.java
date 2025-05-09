@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserRegisterRequest {
-
     @NotBlank
     @Size(min = 1, max = 30)
     private String name;

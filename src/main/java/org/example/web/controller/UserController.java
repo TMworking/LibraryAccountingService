@@ -3,6 +3,8 @@ package org.example.web.controller;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.example.web.dto.rental.request.RentalFilterRequest;
+import org.example.web.dto.rental.response.RentalPageResponse;
 import org.example.web.dto.user.request.UserEmailChangeRequest;
 import org.example.web.dto.user.request.UserPassportChangeRequest;
 import org.example.web.dto.user.request.UserPasswordChangeRequest;
@@ -14,7 +16,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,6 +36,13 @@ public class UserController {
         return ResponseEntity.ok().body(response);
     }
 
+    @PostMapping("/{id}/rentals")
+    @PreAuthorize("#id == principal.id or hasAnyRole('ADMIN', 'LIBRARIAN')")
+    public ResponseEntity<RentalPageResponse> getUserRentals(@PathVariable Long userId, @Valid RentalFilterRequest request) {
+        RentalPageResponse response = new RentalPageResponse();
+        // TODO
+        return ResponseEntity.ok(response);
+    }
 
     @PatchMapping("/{id}")
     @PreAuthorize("#id == principal.id or hasRole('ADMIN')")
