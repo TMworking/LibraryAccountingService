@@ -133,3 +133,11 @@ databaseChangeLog:
             tableName: user_role
             separator: ","
             encoding: UTF-8
+
+  - changeSet:
+      id: update-overdue-rentals-view
+      author: maksim
+      changes:
+          - sql:
+              sql: |
+                REFRESH MATERIALIZED VIEW overdue_rentals;

@@ -34,4 +34,19 @@ public class OverdueRentalView {
 
     @Column(name = "due_date")
     private LocalDate dueDate;
+
+    @Column(name = "user_name")
+    private String userName;
+
+    @Column(name = "user_surname")
+    private String userSurname;
+
+    @Column(name = "user_email")
+    private String userEmail;
+
+    @Column(name = "user_phone")
+    private String userPhone;
+
+    @Column(name = "book_name")
+    private String bookName;
 }

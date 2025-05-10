@@ -7,6 +7,7 @@ import org.example.mappers.BookMapper;
 import org.example.mappers.RentalMapper;
 import org.example.model.Page;
 import org.example.service.domain.BookService;
+import org.example.service.domain.CatalogService;
 import org.example.service.mapping.BookMappingService;
 import org.example.web.dto.book.request.BookCreateRequest;
 import org.example.web.dto.book.request.BookFilterRequest;
@@ -17,6 +18,8 @@ import org.example.web.dto.rental.request.RentalFilterRequest;
 import org.example.web.dto.rental.response.RentalPageResponse;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class BookMappingServiceImpl implements BookMappingService {
@@ -24,6 +27,7 @@ public class BookMappingServiceImpl implements BookMappingService {
     private final BookService bookService;
     private final BookMapper bookMapper;
     private final RentalMapper rentalMapper;
+    private final CatalogService catalogService;
 
     @Override
     public BookResponse getBookById(Long id) {
@@ -38,6 +42,10 @@ public class BookMappingServiceImpl implements BookMappingService {
 
     @Override
     public BookPageResponse getAllBooksWithFilter(BookFilterRequest request) {
+        if (request.getCatalogIds() != null && !request.getCatalogIds().isEmpty()) {
+            List<Long> allCatalogIds = catalogService.findAllSubCatalogIds(request.getCatalogIds());
+            request.setCatalogIds(allCatalogIds);
+        }
         Page<Book> bookPage = bookService.findBooksWithFilter(request);
         return bookMapper.toPageResponse(bookPage);
     }
@@ -52,7 +60,7 @@ public class BookMappingServiceImpl implements BookMappingService {
     @Override
     public BookResponse updateBook(Long id, BookUpdateRequest request) {
         Book existingBook = bookService.findById(id);
-        bookMapper.updateEntityFromDto(request, existingBook);
+        bookMapper.updateFromRequest(request, existingBook);
         Book updatedBook = bookService.updateBook(existingBook);
         return bookMapper.toResponse(updatedBook);
     }

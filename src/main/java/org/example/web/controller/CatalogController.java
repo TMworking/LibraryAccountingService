@@ -3,7 +3,9 @@ package org.example.web.controller;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.example.service.mapping.CatalogMappingService;
 import org.example.web.dto.book.request.AddBooksRequest;
+import org.example.web.dto.catalog.request.CatalogChangeParentRequest;
 import org.example.web.dto.catalog.request.CatalogCreateRequest;
 import org.example.web.dto.catalog.request.CatalogUpdateRequest;
 import org.example.web.dto.catalog.response.CatalogPageResponse;
@@ -26,32 +28,33 @@ import org.springframework.web.bind.annotation.RestController;
 // TODO: all for ADMIN and LIBRARIAN roles
 public class CatalogController {
 
+    private final CatalogMappingService catalogMappingService;
+
     // TODO: add find catalog by id with books in catalog (IDK)
     @GetMapping
     @PreAuthorize("hasAnyRole('ADMIN', 'LIBRARIAN', 'USER')")
     public ResponseEntity<CatalogPageResponse> getAllCatalogs() {
-        CatalogPageResponse response = new CatalogPageResponse();
-        // TODO
-        return ResponseEntity.ok().body(response);
+        return ResponseEntity.ok().body(catalogMappingService.getAllCatalogs());
     }
 
     @PostMapping
     public ResponseEntity<CatalogResponse> createCatalog(@Valid @RequestBody CatalogCreateRequest request) {
-        CatalogResponse response = new CatalogResponse();
-        // TODO
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        return ResponseEntity.status(HttpStatus.CREATED).body(catalogMappingService.createCatalog(request));
     }
 
     @PatchMapping("/{id}")
     public ResponseEntity<CatalogResponse> updateCatalog(@PathVariable("id") Long id, @Valid @RequestBody CatalogUpdateRequest request) {
-        CatalogResponse response = new CatalogResponse();
-        // TODO
-        return ResponseEntity.ok().body(response);
+        return ResponseEntity.ok().body(catalogMappingService.updateCatalog(id, request));
+    }
+
+    @PatchMapping("/{id}/parent")
+    public ResponseEntity<CatalogResponse> changeCatalogParent(@PathVariable("id") Long id, @Valid @RequestBody CatalogChangeParentRequest request) {
+        return ResponseEntity.ok().body(catalogMappingService.changeCatalogParent(id, request));
     }
 
     @PatchMapping("/{id}/books")
     public ResponseEntity<Void> addBooksToCatalog(@PathVariable("id") Long id, @Valid @RequestBody AddBooksRequest request) {
-        // TODO
+        catalogMappingService.addBooksToCatalog(id, request);
         return ResponseEntity.ok().body(null);
     }
 }

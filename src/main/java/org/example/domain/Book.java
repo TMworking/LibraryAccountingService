@@ -17,8 +17,9 @@ import lombok.ToString;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "books")
@@ -49,17 +50,17 @@ public class Book {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToMany(mappedBy = "books")
-    private List<Catalog> catalogs = new ArrayList<>();
+    private Set<Catalog> catalogs = new HashSet<>();
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToMany(mappedBy = "books")
-    private List<Author> authors = new ArrayList<>();
+    private Set<Author> authors = new HashSet<>();
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "book", cascade = CascadeType.MERGE)
-    private List<Rental> rentals = new ArrayList<>();
+    private Set<Rental> rentals = new HashSet<>();
 
     public void addRental(Rental rental) {
         this.rentals.add(rental);

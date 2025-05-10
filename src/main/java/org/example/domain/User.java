@@ -21,9 +21,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Entity
@@ -64,7 +64,7 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user", cascade = CascadeType.MERGE)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    private List<Rental> rentals = new ArrayList<>();
+    private Set<Rental> rentals = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinTable(
@@ -74,12 +74,12 @@ public class User implements UserDetails {
     )
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    private List<Role> roles = new ArrayList<>();
+    private Set<Role> roles = new HashSet<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    private List<RefreshToken> refreshTokens = new ArrayList<>();
+    private Set<RefreshToken> refreshTokens = new HashSet<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

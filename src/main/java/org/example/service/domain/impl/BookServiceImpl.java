@@ -60,7 +60,6 @@ public class BookServiceImpl implements BookService {
             throw new BookDeletionException("Can't delete book with active rentals");
         }
         book.setDeletedAt(LocalDateTime.now());
-        bookRepository.update(book);
     }
 
     @Override

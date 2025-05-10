@@ -3,9 +3,10 @@ package org.example.web.controller;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.example.service.mapping.OverdueRentalMappingService;
 import org.example.service.mapping.RentalMappingService;
+import org.example.web.dto.rental.request.OverdueRentalFilterRequest;
 import org.example.web.dto.rental.request.RentalCreateRequest;
-import org.example.web.dto.rental.request.RentalFilterRequest;
 import org.example.web.dto.rental.request.RentalProlongationRequest;
 import org.example.web.dto.rental.response.OverdueRentalPageResponse;
 import org.example.web.dto.rental.response.RentalResponse;
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class RentalController {
 
     private final RentalMappingService rentalMappingService;
+    private final OverdueRentalMappingService overdueRentalMappingService;
 
     @GetMapping("/{id}")
     public ResponseEntity<RentalResponse> getRentalById(@PathVariable("id") Long id) {
@@ -51,9 +53,7 @@ public class RentalController {
     }
 
     @PostMapping("/overdue")
-    public ResponseEntity<OverdueRentalPageResponse> getAllOverdueRentals(@Valid @RequestBody RentalFilterRequest request) {
-        OverdueRentalPageResponse response = new OverdueRentalPageResponse();
-        // TODO
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    public ResponseEntity<OverdueRentalPageResponse> getAllOverdueRentals(@Valid @RequestBody OverdueRentalFilterRequest request) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(overdueRentalMappingService.getAllOverdueRentals(request));
     }
 }

@@ -4,9 +4,13 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Fetch;
+import jakarta.persistence.criteria.JoinType;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import org.example.domain.Rental;
+import org.example.domain.Role;
+import org.example.domain.User;
 import org.example.model.Page;
 import org.example.repository.RentalRepository;
 import org.example.repository.specification.RentalSpecification;
@@ -73,6 +77,10 @@ public class RentalRepositoryImpl implements RentalRepository {
         CriteriaQuery<Rental> query = cb.createQuery(Rental.class);
         Root<Rental> root = query.from(Rental.class);
 
+        Fetch<Rental, User> rentalUserFetch = root.fetch("user", JoinType.LEFT);
+        Fetch<User, Role> userRoleFetch = rentalUserFetch.fetch("roles", JoinType.LEFT);
+        root.fetch("book", JoinType.LEFT);
+
         List<Predicate> predicates = new ArrayList<>();
         predicates.add(cb.equal(root.get("user").get("id"), userId));
         RentalSpecification.applyFilter(filter, cb, root, predicates);
@@ -102,6 +110,10 @@ public class RentalRepositoryImpl implements RentalRepository {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<Rental> query = cb.createQuery(Rental.class);
         Root<Rental> root = query.from(Rental.class);
+
+        Fetch<Rental, User> rentalUserFetch = root.fetch("user", JoinType.LEFT);
+        Fetch<User, Role> userRoleFetch = rentalUserFetch.fetch("roles", JoinType.LEFT);
+        root.fetch("book", JoinType.LEFT);
 
         List<Predicate> predicates = new ArrayList<>();
         predicates.add(cb.equal(root.get("book").get("id"), bookId));

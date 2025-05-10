@@ -16,7 +16,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.example.enums.UserRole;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "roles")
@@ -36,5 +37,5 @@ public class Role {
     @ManyToMany(mappedBy = "roles")
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    private List<User> users;
+    private Set<User> users = new HashSet<>();
 }

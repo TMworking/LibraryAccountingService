@@ -45,7 +45,7 @@ public abstract class BookMapperDelegate implements BookMapper {
     }
 
     @Override
-    public void updateEntityFromDto(BookUpdateRequest request, Book book) {
-        delegate.updateEntityFromDto(request, book);
+    public void updateFromRequest(BookUpdateRequest request, Book book) {
+        delegate.updateFromRequest(request, book);
     }
 }

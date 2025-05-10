@@ -18,8 +18,9 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "catalogs")
@@ -42,7 +43,7 @@ public class Catalog {
     @OneToMany(mappedBy = "parent", cascade = CascadeType.MERGE)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    private List<Catalog> children = new ArrayList<>();
+    private Set<Catalog> children = new HashSet<>();
 
     @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     @JoinTable(
@@ -52,11 +53,15 @@ public class Catalog {
     )
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    private List<Book> books = new ArrayList<>();
+    private Set<Book> books = new HashSet<>();
 
     public void addBook(Book book) {
         this.books.add(book);
         book.getCatalogs().add(this);
+    }
+
+    public void addBooks(List<Book> books) {
+        books.forEach(this::addBook);
     }
 
     public void addChild(Catalog child) {

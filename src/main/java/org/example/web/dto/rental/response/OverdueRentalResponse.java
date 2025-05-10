@@ -10,7 +10,10 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OverdueRentalResponse {
-    private Long id;
+    private Long rentalId;
+    private Long userId;
+    private Long bookId;
+    private String bookName;
     private String userName;
     private String userSurname;
     private String userEmail;

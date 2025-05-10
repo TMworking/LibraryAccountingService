@@ -4,9 +4,12 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Fetch;
+import jakarta.persistence.criteria.JoinType;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import org.example.domain.Book;
+import org.example.domain.Catalog;
 import org.example.model.Page;
 import org.example.repository.BookRepository;
 import org.example.repository.specification.BookSpecification;
@@ -45,12 +48,17 @@ public class BookRepositoryImpl implements BookRepository {
         CriteriaQuery<Book> query = cb.createQuery(Book.class);
         Root<Book> root = query.from(Book.class);
 
+        root.fetch("authors", JoinType.LEFT);
+        Fetch<Book, Catalog> catalogFetch = root.fetch("catalogs", JoinType.LEFT);
+        catalogFetch.fetch("parent", JoinType.LEFT);
+
         List<Predicate> predicates = new ArrayList<>();
         predicates.add(cb.isNull(root.get("deletedAt")));
         BookSpecification.applyFilter(filter, cb, root, predicates);
         BookSpecification.applySort(filter.getSortOptionList(), root, query, cb);
 
         query.where(cb.and(predicates.toArray(new Predicate[0])));
+        query.select(root).distinct(true);
 
         List<Book> content = entityManager.createQuery(query)
                 .setFirstResult(filter.getPage() * filter.getSize())

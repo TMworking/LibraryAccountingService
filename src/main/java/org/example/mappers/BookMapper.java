@@ -7,12 +7,13 @@ import org.example.web.dto.book.request.BookUpdateRequest;
 import org.example.web.dto.book.response.BookPageResponse;
 import org.example.web.dto.book.response.BookResponse;
 import org.example.web.dto.book.response.BookShortResponse;
+import org.mapstruct.BeanMapping;
 import org.mapstruct.DecoratedWith;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
-@Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+@Mapper(componentModel = "spring")
 @DecoratedWith(BookMapperDelegate.class)
 public interface BookMapper {
 
@@ -31,5 +32,6 @@ public interface BookMapper {
         );
     }
 
-    void updateEntityFromDto(BookUpdateRequest request, @MappingTarget Book book);
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    void updateFromRequest(BookUpdateRequest request, @MappingTarget Book book);
 }
