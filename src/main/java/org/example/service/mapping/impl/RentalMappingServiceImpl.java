@@ -14,8 +14,6 @@ import org.example.web.dto.rental.request.RentalProlongationRequest;
 import org.example.web.dto.rental.response.RentalResponse;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-
 @Service
 @RequiredArgsConstructor
 public class RentalMappingServiceImpl implements RentalMappingService {
@@ -35,21 +33,13 @@ public class RentalMappingServiceImpl implements RentalMappingService {
     public RentalResponse createRental(RentalCreateRequest request) {
         User user = userService.findById(request.getUserId());
         Book book = bookService.findById(request.getBookId());
-
-        Rental rental = new Rental();
-        rental.setRentDate(request.getRentDate());
-        rental.setDuration(request.getDuration());
-        user.addRental(rental);
-        book.addRental(rental);
-
-        return rentalMapper.toResponse(rentalService.save(rental));
+        return rentalMapper.toResponse(rentalService.create(book, user, request.getRentDate(), request.getDuration()));
     }
 
     @Override
     public void closeRental(Long id) {
         Rental rental = rentalService.findById(id);
-        rental.setReturnDate(LocalDate.now());
-        rentalService.update(rental);
+        rentalService.closeRental(rental);
     }
 
     @Override

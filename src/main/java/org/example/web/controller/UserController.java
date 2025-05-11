@@ -30,7 +30,6 @@ public class UserController {
 
     private final UserMappingService userMappingService;
 
-    // TODO: accessControlService
     @GetMapping("/{id}")
     @PreAuthorize("@accessControlService.canViewUser(principal.id, #id)")
     public ResponseEntity<UserResponse> getUserById(@PathVariable("id") Long id) {
@@ -39,8 +38,8 @@ public class UserController {
 
     @PostMapping("/{id}/rentals")
     @PreAuthorize("#id == principal.id or hasAnyRole('ADMIN', 'LIBRARIAN')")
-    public ResponseEntity<RentalPageResponse> getUserRentals(@PathVariable("id") Long userId, @Valid @RequestBody RentalFilterRequest request) {
-        return ResponseEntity.ok(userMappingService.getUserRentals(userId, request));
+    public ResponseEntity<RentalPageResponse> getUserRentals(@PathVariable("id") Long id, @Valid @RequestBody RentalFilterRequest request) {
+        return ResponseEntity.ok(userMappingService.getUserRentals(id, request));
     }
 
     @PatchMapping("/{id}")

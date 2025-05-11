@@ -25,12 +25,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/catalogs")
 @Tag(name = "Catalog")
-// TODO: all for ADMIN and LIBRARIAN roles
 public class CatalogController {
 
     private final CatalogMappingService catalogMappingService;
 
-    // TODO: add find catalog by id with books in catalog (IDK)
     @GetMapping
     @PreAuthorize("hasAnyRole('ADMIN', 'LIBRARIAN', 'USER')")
     public ResponseEntity<CatalogPageResponse> getAllCatalogs() {

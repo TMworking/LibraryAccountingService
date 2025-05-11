@@ -93,6 +93,11 @@ public class User implements UserDetails {
         role.getUsers().add(this);
     }
 
+    public void removeRole(Role role) {
+        this.roles.remove(role);
+        role.getUsers().remove(this);
+    }
+
     public void addRefreshToken(RefreshToken refreshToken) {
         this.refreshTokens.add(refreshToken);
         refreshToken.setUser(this);

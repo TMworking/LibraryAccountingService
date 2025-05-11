@@ -4,3 +4,11 @@ spring:
     username: ${DB_USERNAME:postgres}
     password: ${DB_PASSWORD:admin}
     driver-class-name: org.postgresql.Driver
+
+jwt:
+  secret: f71ba1263e7217d844fc32a45794b04a9d6f139320cfad785707f80b72d7b39841796e2b65e2f7cffd47cbc5620ee34d8127054f06ce98cb2195f92b5d1b6642
+  refresh:
+    expiration: 2592000000
+    max-count: 5
+  access:
+    expiration: 900000

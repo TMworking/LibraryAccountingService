@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/books")
 @Tag(name = "Book")
-// TODO: for ADMIN and LIBRARIAN
 public class BookController {
 
     private final BookMappingService bookMappingService;

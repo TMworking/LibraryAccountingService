@@ -67,12 +67,7 @@ public class AuthorRepositoryImpl implements AuthorRepository {
         countQuery.select(cb.count(countQuery.from(Author.class)));
         long totalItems = entityManager.createQuery(countQuery).getSingleResult();
 
-        return new Page<>(
-                content,
-                filterRequest.getPage(),
-                filterRequest.getSize(),
-                totalItems
-        );
+        return new Page<>(content, filterRequest.getPage(), filterRequest.getSize(), totalItems);
     }
 
     @Override

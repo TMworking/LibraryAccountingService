@@ -4,8 +4,9 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.example.enums.UserRole;
 import org.example.enums.RoleAction;
+
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -14,5 +15,5 @@ public class RoleRequest {
     @NotNull
     private RoleAction roleAction;
     @NotNull
-    private UserRole userRole;
+    private List<Long> roleIds;
 }

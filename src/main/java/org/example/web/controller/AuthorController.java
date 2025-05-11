@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/authors")
 @Tag(name = "Author")
-// TODO: for ADMIN and LIBRARIAN
 public class AuthorController {
 
     private final AuthorMappingService authorMappingService;

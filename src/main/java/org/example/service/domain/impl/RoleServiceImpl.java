@@ -9,6 +9,7 @@ import org.example.service.domain.RoleService;
 import org.springframework.stereotype.Service;
 
 import java.text.MessageFormat;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -22,5 +23,10 @@ public class RoleServiceImpl implements RoleService {
                 .orElseThrow(() -> new NotFoundException(
                 MessageFormat.format("Role with name {0} not found", name)
         ));
+    }
+
+    @Override
+    public List<Role> findAllRolesByIds(List<Long> ids) {
+        return roleRepository.findAllByIds(ids);
     }
 }

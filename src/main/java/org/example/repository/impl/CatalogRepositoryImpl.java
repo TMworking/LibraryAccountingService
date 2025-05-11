@@ -20,7 +20,7 @@ public class CatalogRepositoryImpl implements CatalogRepository {
 
     @Override
     public Optional<Catalog> findById(Long id) {
-        return Optional.of(entityManager.find(Catalog.class, id));
+        return Optional.ofNullable(entityManager.find(Catalog.class, id));
     }
 
     @Override

@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/rentals")
 @Tag(name = "Rental")
-// TODO: all for LIBRARIAN or ADMIN role
 public class RentalController {
 
     private final RentalMappingService rentalMappingService;
