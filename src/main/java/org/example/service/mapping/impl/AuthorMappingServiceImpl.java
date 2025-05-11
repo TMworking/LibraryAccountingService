@@ -9,9 +9,9 @@ import org.example.web.dto.author.request.AuthorSortRequest;
 import org.example.web.dto.author.response.AuthorPageResponse;
 import org.example.web.dto.author.response.AuthorResponse;
 import org.example.web.dto.book.request.AddBooksRequest;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 @RequiredArgsConstructor
 public class AuthorMappingServiceImpl implements AuthorMappingService {
 

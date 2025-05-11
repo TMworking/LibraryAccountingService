@@ -11,9 +11,9 @@ import org.example.web.dto.catalog.request.CatalogCreateRequest;
 import org.example.web.dto.catalog.request.CatalogUpdateRequest;
 import org.example.web.dto.catalog.response.CatalogPageResponse;
 import org.example.web.dto.catalog.response.CatalogResponse;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 @RequiredArgsConstructor
 public class CatalogMappingServiceImpl implements CatalogMappingService {
 

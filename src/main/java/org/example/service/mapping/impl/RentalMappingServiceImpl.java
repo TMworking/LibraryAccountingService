@@ -12,11 +12,11 @@ import org.example.service.mapping.RentalMappingService;
 import org.example.web.dto.rental.request.RentalCreateRequest;
 import org.example.web.dto.rental.request.RentalProlongationRequest;
 import org.example.web.dto.rental.response.RentalResponse;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 
-@Component
+@Service
 @RequiredArgsConstructor
 public class RentalMappingServiceImpl implements RentalMappingService {
 

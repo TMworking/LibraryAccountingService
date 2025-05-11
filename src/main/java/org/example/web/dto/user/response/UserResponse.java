@@ -3,7 +3,7 @@ package org.example.web.dto.user.response;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.example.enums.UserRole;
+import org.example.web.dto.role.RoleResponse;
 
 import java.util.List;
 
@@ -17,5 +17,6 @@ public class UserResponse {
     private String patronymic;
     private String email;
     private String phoneNumber;
-    private List<UserRole> roles;
+    private String passport;
+    private List<RoleResponse> roles;
 }

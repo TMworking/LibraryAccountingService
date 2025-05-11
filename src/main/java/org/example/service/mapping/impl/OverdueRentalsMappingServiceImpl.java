@@ -6,9 +6,9 @@ import org.example.service.domain.OverdueRentalsViewService;
 import org.example.service.mapping.OverdueRentalMappingService;
 import org.example.web.dto.rental.request.OverdueRentalFilterRequest;
 import org.example.web.dto.rental.response.OverdueRentalPageResponse;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 @RequiredArgsConstructor
 public class OverdueRentalsMappingServiceImpl implements OverdueRentalMappingService {
 

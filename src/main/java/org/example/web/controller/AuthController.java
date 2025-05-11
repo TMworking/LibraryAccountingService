@@ -3,6 +3,7 @@ package org.example.web.controller;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.example.service.mapping.UserMappingService;
 import org.example.web.dto.auth.AuthResponse;
 import org.example.web.dto.auth.RefreshTokenRequest;
 import org.example.web.dto.user.request.UserLoginRequest;
@@ -21,10 +22,11 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "Authentication")
 public class AuthController {
 
+    private final UserMappingService userMappingService;
+
     @PostMapping("/registration")
     public ResponseEntity<UserRegisterResponse> register(@Valid @RequestBody UserRegisterRequest request) {
-        UserRegisterResponse response = new UserRegisterResponse();
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        return ResponseEntity.status(HttpStatus.CREATED).body(userMappingService.createUser(request));
     }
 
     @PostMapping("/login")

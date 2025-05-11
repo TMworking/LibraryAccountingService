@@ -16,11 +16,11 @@ import org.example.web.dto.book.response.BookPageResponse;
 import org.example.web.dto.book.response.BookResponse;
 import org.example.web.dto.rental.request.RentalFilterRequest;
 import org.example.web.dto.rental.response.RentalPageResponse;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Component
+@Service
 @RequiredArgsConstructor
 public class BookMappingServiceImpl implements BookMappingService {
 
