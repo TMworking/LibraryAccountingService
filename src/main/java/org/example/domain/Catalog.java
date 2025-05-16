@@ -45,7 +45,7 @@ public class Catalog {
     @EqualsAndHashCode.Exclude
     private Set<Catalog> children = new HashSet<>();
 
-    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(
             name = "catalog_book",
             joinColumns = @JoinColumn(name = "catalog_id"),

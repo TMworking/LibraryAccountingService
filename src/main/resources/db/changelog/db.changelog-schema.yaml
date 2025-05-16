@@ -330,3 +330,8 @@ databaseChangeLog:
               WHERE 
                   r.return_date IS NULL 
                   AND (r.rent_date + (r.duration * INTERVAL '1 day'))::DATE < CURRENT_DATE;
+              
+              CREATE UNIQUE INDEX idx_overdue_rentals_unique ON overdue_rentals(rental_id);
+              
+              CREATE INDEX idx_overdue_rentals_user_id ON overdue_rentals(user_id);
+              CREATE INDEX idx_overdue_rentals_due_date ON overdue_rentals(book_id);

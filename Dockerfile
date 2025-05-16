@@ -17,3 +17,5 @@ COPY --from=build /app/target/*.jar app.jar
 COPY --from=build /app/src/main/resources /app/
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "app.jar"]
+
+# TODO: move to maven spring-boot-plugin and delete dockerfile

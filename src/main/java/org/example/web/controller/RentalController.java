@@ -5,10 +5,12 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.service.mapping.OverdueRentalMappingService;
 import org.example.service.mapping.RentalMappingService;
+import org.example.web.dto.rental.request.ClosedRentalFilterRequest;
 import org.example.web.dto.rental.request.OverdueRentalFilterRequest;
 import org.example.web.dto.rental.request.RentalCreateRequest;
 import org.example.web.dto.rental.request.RentalProlongationRequest;
 import org.example.web.dto.rental.response.OverdueRentalPageResponse;
+import org.example.web.dto.rental.response.RentalPageResponse;
 import org.example.web.dto.rental.response.RentalResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -54,5 +56,10 @@ public class RentalController {
     @PostMapping("/overdue")
     public ResponseEntity<OverdueRentalPageResponse> getAllOverdueRentals(@Valid @RequestBody OverdueRentalFilterRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(overdueRentalMappingService.getAllOverdueRentals(request));
+    }
+
+    @PostMapping("/returned")
+    public ResponseEntity<RentalPageResponse> getAllClosedRentals(@Valid @RequestBody ClosedRentalFilterRequest request) {
+        return ResponseEntity.ok().body(rentalMappingService.getAllClosedRentalsWithFilter(request));
     }
 }

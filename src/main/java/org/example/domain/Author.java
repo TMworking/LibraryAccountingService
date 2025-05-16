@@ -38,7 +38,7 @@ public class Author {
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(
             name = "author_book",
             joinColumns = @JoinColumn(name = "author_id"),

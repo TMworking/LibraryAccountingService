@@ -3,6 +3,7 @@ package org.example.web.dto.book.response;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.web.dto.Meta;
 
 import java.util.List;
 
@@ -10,8 +11,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BookPageResponse {
-    private List<BookShortResponse> responses;
-    private int pageNumber;
-    private int pageSize;
-    private long totalRecords;
+    private List<BookShortResponse> data;
+    private Meta meta;
 }

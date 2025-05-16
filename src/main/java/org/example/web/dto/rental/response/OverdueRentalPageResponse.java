@@ -3,6 +3,7 @@ package org.example.web.dto.rental.response;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.web.dto.Meta;
 
 import java.util.List;
 
@@ -10,8 +11,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OverdueRentalPageResponse {
-    private List<OverdueRentalResponse> rentalResponses;
-    private int pageNumber;
-    private int pageSize;
-    private long totalRecords;
+    private List<OverdueRentalResponse> data;
+    private Meta meta;
 }

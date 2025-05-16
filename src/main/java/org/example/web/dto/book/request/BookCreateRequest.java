@@ -2,6 +2,7 @@ package org.example.web.dto.book.request;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -31,9 +32,11 @@ public class BookCreateRequest {
 
     private LocalDate publishingDate;
 
+    @NotEmpty
     @Builder.Default
     private List<Long> authorIds = new ArrayList<>();
 
+    @NotEmpty
     @Builder.Default
     private List<Long> catalogIds = new ArrayList<>();
 }

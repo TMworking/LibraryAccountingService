@@ -39,7 +39,6 @@ public class BookController {
     }
 
     @PostMapping("/{id}/rentals")
-    @PreAuthorize("hasAnyRole('ADMIN', 'LIBRARIAN')")
     public ResponseEntity<RentalPageResponse> getBookRentals(@PathVariable("id") Long id, @Valid @RequestBody RentalFilterRequest request) {
         RentalPageResponse response = bookMappingService.getBookRentals(id, request);
         return ResponseEntity.ok().body(response);

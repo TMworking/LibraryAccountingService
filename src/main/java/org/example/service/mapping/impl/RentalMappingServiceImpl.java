@@ -9,8 +9,10 @@ import org.example.service.domain.BookService;
 import org.example.service.domain.RentalService;
 import org.example.service.domain.UserService;
 import org.example.service.mapping.RentalMappingService;
+import org.example.web.dto.rental.request.ClosedRentalFilterRequest;
 import org.example.web.dto.rental.request.RentalCreateRequest;
 import org.example.web.dto.rental.request.RentalProlongationRequest;
+import org.example.web.dto.rental.response.RentalPageResponse;
 import org.example.web.dto.rental.response.RentalResponse;
 import org.springframework.stereotype.Service;
 
@@ -48,5 +50,10 @@ public class RentalMappingServiceImpl implements RentalMappingService {
         Integer currDuration = rental.getDuration();
         rental.setDuration(currDuration + request.getDays());
         return rentalMapper.toResponse(rentalService.update(rental));
+    }
+
+    @Override
+    public RentalPageResponse getAllClosedRentalsWithFilter(ClosedRentalFilterRequest request) {
+        return rentalMapper.toPageResponse(rentalService.findPageClosedRentalsWithFilter(request));
     }
 }

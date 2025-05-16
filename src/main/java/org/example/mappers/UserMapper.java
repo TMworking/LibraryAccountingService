@@ -2,6 +2,7 @@ package org.example.mappers;
 
 import org.example.domain.User;
 import org.example.model.Page;
+import org.example.web.dto.Meta;
 import org.example.web.dto.user.request.UserRegisterRequest;
 import org.example.web.dto.user.request.UserUpdateRequest;
 import org.example.web.dto.user.response.UserPageResponse;
@@ -24,9 +25,7 @@ public interface UserMapper {
     default UserPageResponse toPageResponse(Page<User> page) {
         return new UserPageResponse(
                 page.getContent().stream().map(this::toResponse).toList(),
-                page.getPageNumber(),
-                page.getPageSize(),
-                page.getTotalRecords()
+                new Meta(page.getPageNumber(), page.getPageSize(), page.getTotalRecords())
         );
     }
 

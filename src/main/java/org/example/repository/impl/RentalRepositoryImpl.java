@@ -14,6 +14,7 @@ import org.example.domain.User;
 import org.example.model.Page;
 import org.example.repository.RentalRepository;
 import org.example.repository.specification.RentalSpecification;
+import org.example.web.dto.rental.request.ClosedRentalFilterRequest;
 import org.example.web.dto.rental.request.RentalFilterRequest;
 import org.springframework.stereotype.Repository;
 
@@ -44,10 +45,14 @@ public class RentalRepositoryImpl implements RentalRepository {
     }
 
     @Override
-    public Page<Rental> findAllWithFilter(RentalFilterRequest filter) {
+    public Page<Rental> findAllClosedWithFilter(ClosedRentalFilterRequest filter) {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<Rental> query = cb.createQuery(Rental.class);
         Root<Rental> root = query.from(Rental.class);
+
+        Fetch<Rental, User> rentalUserFetch = root.fetch("user", JoinType.LEFT);
+        Fetch<User, Role> userRoleFetch = rentalUserFetch.fetch("roles", JoinType.LEFT);
+        root.fetch("book", JoinType.LEFT);
 
         List<Predicate> predicates = new ArrayList<>();
         RentalSpecification.applyFilter(filter, cb, root, predicates);

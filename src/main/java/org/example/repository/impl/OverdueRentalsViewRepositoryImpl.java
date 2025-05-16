@@ -24,7 +24,7 @@ public class OverdueRentalsViewRepositoryImpl implements OverdueRentalsViewRepos
 
     @Override
     public void refreshOverdueRentalsView() {
-        entityManager.createNativeQuery("REFRESH MATERIALIZED VIEW overdue_rentals").executeUpdate();
+        entityManager.createNativeQuery("REFRESH MATERIALIZED VIEW CONCURRENTLY overdue_rentals").executeUpdate();
     }
 
     @Override

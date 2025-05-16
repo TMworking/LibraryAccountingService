@@ -22,6 +22,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableMethodSecurity
 public class SecurityConfig {
 
+    private static final String[] adminLibrarianRoles = {"ADMIN", "LIBRARIAN"};
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtAuthFilter jwtAuthFilter) throws Exception {
         return http
@@ -31,10 +33,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/v1/auth/**").permitAll()
                         .requestMatchers("/api/v1/admin/users/**").hasRole("ADMIN")
-                        .requestMatchers("/api/v1/authors/**").hasAnyRole("ADMIN", "LIBRARIAN")
-                        .requestMatchers("/api/v1/books/**").hasAnyRole("ADMIN", "LIBRARIAN")
-                        .requestMatchers("/api/v1/catalogs/**").hasAnyRole("ADMIN", "LIBRARIAN")
-                        .requestMatchers("/api/v1/rentals/**").hasAnyRole("ADMIN", "LIBRARIAN")
+                        .requestMatchers("/api/v1/authors/**").hasAnyRole(adminLibrarianRoles)
+                        .requestMatchers("/api/v1/books/**").hasAnyRole(adminLibrarianRoles)
+                        .requestMatchers("/api/v1/catalogs/**").hasAnyRole(adminLibrarianRoles)
+                        .requestMatchers("/api/v1/rentals/**").hasAnyRole(adminLibrarianRoles)
                         .requestMatchers("/api/v1/user/**").authenticated()
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                         .anyRequest().authenticated()

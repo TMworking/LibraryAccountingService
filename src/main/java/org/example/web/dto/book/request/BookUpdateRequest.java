@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,4 +20,8 @@ public class BookUpdateRequest {
 
     @Min(value = 0)
     private Integer availableCount;
+
+    private List<Long> authorIds;
+
+    private List<Long> catalogIds;
 }

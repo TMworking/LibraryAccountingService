@@ -2,6 +2,7 @@ package org.example.mappers;
 
 import org.example.domain.Book;
 import org.example.model.Page;
+import org.example.web.dto.Meta;
 import org.example.web.dto.book.request.BookCreateRequest;
 import org.example.web.dto.book.request.BookUpdateRequest;
 import org.example.web.dto.book.response.BookPageResponse;
@@ -26,9 +27,7 @@ public interface BookMapper {
     default BookPageResponse toPageResponse(Page<Book> bookPage) {
         return new BookPageResponse(
                 bookPage.getContent().stream().map(this::toShortResponse).toList(),
-                bookPage.getPageNumber(),
-                bookPage.getPageSize(),
-                bookPage.getTotalRecords()
+                new Meta(bookPage.getPageNumber(), bookPage.getPageSize(), bookPage.getTotalRecords())
         );
     }
 

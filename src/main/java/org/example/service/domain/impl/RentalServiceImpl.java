@@ -9,7 +9,7 @@ import org.example.exception.OutOfStockException;
 import org.example.model.Page;
 import org.example.repository.RentalRepository;
 import org.example.service.domain.RentalService;
-import org.example.web.dto.rental.request.RentalFilterRequest;
+import org.example.web.dto.rental.request.ClosedRentalFilterRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,8 +32,8 @@ public class RentalServiceImpl implements RentalService {
     }
 
     @Override
-    public Page<Rental> findPageRentalsWithFilter(RentalFilterRequest request) {
-        return rentalRepository.findAllWithFilter(request);
+    public Page<Rental> findPageClosedRentalsWithFilter(ClosedRentalFilterRequest request) {
+        return rentalRepository.findAllClosedWithFilter(request);
     }
 
     @Override

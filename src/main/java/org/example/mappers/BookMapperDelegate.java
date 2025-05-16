@@ -47,5 +47,17 @@ public abstract class BookMapperDelegate implements BookMapper {
     @Override
     public void updateFromRequest(BookUpdateRequest request, Book book) {
         delegate.updateFromRequest(request, book);
+
+        if (request.getAuthorIds() != null) {
+            List<Author> authors = authorService.getAllByIds(request.getAuthorIds());
+            book.getAuthors().clear();
+            book.addAuthors(authors);
+        }
+
+        if (request.getCatalogIds() != null) {
+            List<Catalog> catalogs = catalogService.getAllByIds(request.getCatalogIds());
+            book.getCatalogs().clear();
+            book.addCatalogs(catalogs);
+        }
     }
 }

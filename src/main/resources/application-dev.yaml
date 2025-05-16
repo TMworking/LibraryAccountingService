@@ -11,4 +11,4 @@ jwt:
     expiration: 2592000000
     max-count: 5
   access:
-    expiration: 900000
+    expiration: 86400000

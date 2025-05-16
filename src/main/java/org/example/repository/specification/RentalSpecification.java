@@ -8,6 +8,7 @@ import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import org.example.domain.Rental;
 import org.example.model.SortOption;
+import org.example.web.dto.rental.request.ClosedRentalFilterRequest;
 import org.example.web.dto.rental.request.RentalFilterRequest;
 
 import java.time.LocalDate;
@@ -18,6 +19,12 @@ public class RentalSpecification {
 
     public static void applyFilter(RentalFilterRequest filter, CriteriaBuilder cb, Root<Rental> root, List<Predicate> predicates) {
         byIsClosed(filter.getIsClosed(), cb, root, predicates);
+        byRentDateFrom(filter.getRentDateFrom(), cb, root, predicates);
+        byRentDateTo(filter.getRentDateTo(), cb, root, predicates);
+    }
+
+    public static void applyFilter(ClosedRentalFilterRequest filter, CriteriaBuilder cb, Root<Rental> root, List<Predicate> predicates) {
+        byIsClosed(true, cb, root, predicates);
         byRentDateFrom(filter.getRentDateFrom(), cb, root, predicates);
         byRentDateTo(filter.getRentDateTo(), cb, root, predicates);
     }
