@@ -80,7 +80,7 @@ public class RentalControllerTest {
         ResponseEntity<RentalResponse> actualResponse = rentalController.prolongRental(id, request);
 
         // Then
-        assertEquals(HttpStatus.CREATED, actualResponse.getStatusCode());
+        assertEquals(HttpStatus.OK, actualResponse.getStatusCode());
         assertEquals(expected, actualResponse.getBody());
         verify(rentalMappingService).updateRental(id, request);
     }
@@ -96,7 +96,7 @@ public class RentalControllerTest {
         ResponseEntity<OverdueRentalPageResponse> actualResponse = rentalController.getAllOverdueRentals(request);
 
         // Then
-        assertEquals(HttpStatus.CREATED, actualResponse.getStatusCode());
+        assertEquals(HttpStatus.OK, actualResponse.getStatusCode());
         assertEquals(expected, actualResponse.getBody());
         verify(overdueRentalMappingService).getAllOverdueRentals(request);
     }

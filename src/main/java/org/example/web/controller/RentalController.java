@@ -34,7 +34,7 @@ public class RentalController {
 
     @GetMapping("/{id}")
     public ResponseEntity<RentalResponse> getRentalById(@PathVariable("id") Long id) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(rentalMappingService.getRentalById(id));
+        return ResponseEntity.ok().body(rentalMappingService.getRentalById(id));
     }
 
     @PostMapping
@@ -50,12 +50,12 @@ public class RentalController {
 
     @PatchMapping("/{id}")
     public ResponseEntity<RentalResponse> prolongRental(@PathVariable("id") Long id, @Valid @RequestBody RentalProlongationRequest request) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(rentalMappingService.updateRental(id, request));
+        return ResponseEntity.ok().body(rentalMappingService.updateRental(id, request));
     }
 
     @PostMapping("/overdue")
     public ResponseEntity<OverdueRentalPageResponse> getAllOverdueRentals(@Valid @RequestBody OverdueRentalFilterRequest request) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(overdueRentalMappingService.getAllOverdueRentals(request));
+        return ResponseEntity.ok().body(overdueRentalMappingService.getAllOverdueRentals(request));
     }
 
     @PostMapping("/returned")
