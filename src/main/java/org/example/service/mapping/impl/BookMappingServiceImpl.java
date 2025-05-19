@@ -8,6 +8,7 @@ import org.example.mappers.RentalMapper;
 import org.example.model.Page;
 import org.example.service.domain.BookService;
 import org.example.service.domain.CatalogService;
+import org.example.service.domain.RentalService;
 import org.example.service.mapping.BookMappingService;
 import org.example.web.dto.book.request.BookCreateRequest;
 import org.example.web.dto.book.request.BookFilterRequest;
@@ -25,6 +26,7 @@ import java.util.List;
 public class BookMappingServiceImpl implements BookMappingService {
 
     private final BookService bookService;
+    private final RentalService rentalService;
     private final BookMapper bookMapper;
     private final RentalMapper rentalMapper;
     private final CatalogService catalogService;
@@ -36,7 +38,7 @@ public class BookMappingServiceImpl implements BookMappingService {
 
     @Override
     public RentalPageResponse getBookRentals(Long bookId, RentalFilterRequest request) {
-        Page<Rental> rentalPage = bookService.getBookRentals(bookId, request);
+        Page<Rental> rentalPage = rentalService.getBookRentals(bookId, request);
         return rentalMapper.toPageResponse(rentalPage);
     }
 

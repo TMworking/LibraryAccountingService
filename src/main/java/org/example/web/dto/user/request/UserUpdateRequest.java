@@ -19,6 +19,6 @@ public class UserUpdateRequest {
     @Size(max = 30)
     private String patronymic;
 
-    @Pattern(regexp = "^\\+?[0-9\\-\\s()]{7,20}$")
+    @Pattern(regexp = "^\\+7[0-9]{10}$")
     private String phoneNumber;
 }

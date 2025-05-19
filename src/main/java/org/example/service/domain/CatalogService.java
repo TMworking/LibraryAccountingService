@@ -8,7 +8,7 @@ public interface CatalogService {
     Catalog findById(Long id);
     List<Catalog> getAllByIds(List<Long> ids);
     List<Long> findAllSubCatalogIds(List<Long> parentIds);
-    List<Catalog> findAll();
+    List<Catalog> findAllRoots();
     Catalog create(Catalog catalog);
     Catalog update(Catalog catalog);
     Catalog addBooksToCatalog(Long id, List<Long> bookIds);

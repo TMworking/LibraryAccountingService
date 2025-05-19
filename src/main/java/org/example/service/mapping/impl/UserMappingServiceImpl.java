@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.domain.User;
 import org.example.mappers.RentalMapper;
 import org.example.mappers.UserMapper;
+import org.example.service.domain.RentalService;
 import org.example.service.domain.UserService;
 import org.example.service.mapping.UserMappingService;
 import org.example.web.dto.rental.request.RentalFilterRequest;
@@ -26,6 +27,7 @@ public class UserMappingServiceImpl implements UserMappingService {
 
     private final UserMapper userMapper;
     private final UserService userService;
+    private final RentalService rentalService;
     private final RentalMapper rentalMapper;
 
     @Override
@@ -40,7 +42,7 @@ public class UserMappingServiceImpl implements UserMappingService {
 
     @Override
     public RentalPageResponse getUserRentals(Long userId, RentalFilterRequest request) {
-        return rentalMapper.toPageResponse(userService.getUserRentals(userId, request));
+        return rentalMapper.toPageResponse(rentalService.getUserRentals(userId, request));
     }
 
     @Override
@@ -94,6 +96,7 @@ public class UserMappingServiceImpl implements UserMappingService {
 
     @Override
     public UserResponse updateUserRoles(Long id, RoleRequest request) {
-        return userMapper.toResponse(userService.updateUserRoles(id, request.getRoleAction(), request.getRoleIds()));
+        User user = userService.findById(id);
+        return userMapper.toResponse(userService.updateUserRoles(user, request.getRoleAction(), request.getRoleIds()));
     }
 }

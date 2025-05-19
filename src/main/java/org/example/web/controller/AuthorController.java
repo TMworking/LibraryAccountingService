@@ -47,7 +47,7 @@ public class AuthorController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AuthorResponse> updateAuthor(@PathVariable("id") Long id, @RequestBody AuthorRequest request) {
+    public ResponseEntity<AuthorResponse> updateAuthor(@PathVariable("id") Long id, @Valid @RequestBody AuthorRequest request) {
         return ResponseEntity.ok().body(authorMappingService.updateAuthor(id, request));
     }
 

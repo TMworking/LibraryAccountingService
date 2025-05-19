@@ -22,7 +22,7 @@ public class CatalogMappingServiceImpl implements CatalogMappingService {
 
     @Override
     public CatalogPageResponse getAllCatalogs() {
-        return catalogMapper.toPageResponse(catalogMapper.toResponseList(catalogService.findAll()));
+        return catalogMapper.toPageResponse(catalogMapper.toResponseList(catalogService.findAllRoots()));
     }
 
     @Override
@@ -50,6 +50,7 @@ public class CatalogMappingServiceImpl implements CatalogMappingService {
 
     @Override
     public CatalogResponse changeCatalogParent(Long id, CatalogChangeParentRequest request) {
-        return catalogMapper.toResponse(catalogService.changeCatalogParent(id, request.getParentId()));
+        Long newParentId = request.getParentId() == 0 ? null : request.getParentId();
+        return catalogMapper.toResponse(catalogService.changeCatalogParent(id, newParentId));
     }
 }
