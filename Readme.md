@@ -32,7 +32,7 @@ docker-compose up --build
 ```
 
 После запуска сервис будет доступен по адресам:
-- API: http://localhost:8080
+- API: http://localhost:8080/api/v1/
 - Swagger UI: http://localhost:8080/swagger-ui.html (Базовый админ для авторизации: логин: admin, пароль: admin)
 
 ## Остановка сервиса
