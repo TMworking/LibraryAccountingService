@@ -37,9 +37,9 @@ docker-compose up --build
 
 ## Остановка сервиса
 ```bash
-docker-compose up --build
+docker-compose down
 ```
 Для полной очистки (с удалением томов):
 ```bash
-docker-compose up --build -v
+docker-compose down -v
 ```
