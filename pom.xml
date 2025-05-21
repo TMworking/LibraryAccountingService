@@ -124,12 +124,6 @@
             <version>0.12.6</version>
             <scope>runtime</scope>
         </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-docker-compose</artifactId>
-            <version>3.4.4</version>
-        </dependency>
     </dependencies>
 
     <build>
@@ -137,11 +131,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <image>
-                        <name>library-accounting-service</name>
-                    </image>
-                </configuration>
+                <version>3.4.4</version>
             </plugin>
 
             <plugin>
