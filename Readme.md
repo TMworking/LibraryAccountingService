@@ -23,8 +23,8 @@
 - Установите [Docker](https://docs.docker.com/get-docker/) и [Docker Compose](https://docs.docker.com/compose/install/)
 - Клонируйте репозиторий:
   ```bash
-  git clone https://github.com/{username}/library-accounting.git
-  cd library-accounting
+  git clone https://github.com/{username}/LibraryAccountingService.git
+  cd LibraryAccountingService
   ```
 ### Запуск через Docker Compose
 ```bash
